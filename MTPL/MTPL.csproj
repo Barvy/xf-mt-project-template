@@ -1,0 +1,194 @@
+﻿<Project Sdk="MSBuild.Sdk.Extras/2.1.2">
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;MonoAndroid90;MonoAndroid10.0;Xamarin.iOS10;</TargetFrameworks>
+    <AssemblyName>MTPL.Mobile</AssemblyName>
+    <RootNamespace>MTPL.Mobile</RootNamespace>
+    <PackageId>MTPL</PackageId>
+    <!-- PackageIcon>icon.png</PackageIcon -->
+    <PackageIcon>package_logo_128x128.png</PackageIcon>
+    <Summary>MTPL</Summary>
+    <PackageTags>MTPL</PackageTags>
+    <Title>MTPL</Title>
+    <Description>MTPL</Description>
+    <Product>MTPL</Product>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <AssemblyFileVersion>1.0.0.0</AssemblyFileVersion>
+    <Version>1.0.9</Version>
+    <PackageVersion>$(Version)$(VersionSuffix)</PackageVersion>
+    <Authors>MTPL</Authors>
+    <Owners>me</Owners>
+    <NeutralLanguage>en</NeutralLanguage>
+    <Copyright>MTPL</Copyright>
+    <RepositoryUrl>https://gith</RepositoryUrl>
+    <PackageReleaseNotes>See: htt</PackageReleaseNotes>
+    <DefineConstants>$(DefineConstants);</DefineConstants>
+    <UseFullSemVerForNuGet>false</UseFullSemVerForNuGet>
+
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageProjectUrl>https://go.mi</PackageProjectUrl>
+    <MDocDocumentationDirectory>$(MSBuildThisFileDirectory)..\docs\en</MDocDocumentationDirectory>
+    <DebugType>portable</DebugType>
+    <Configurations>Debug;Release</Configurations>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)'=='Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DefineConstants>$(DefineConstants);DEBUG;</DefineConstants>
+  </PropertyGroup>
+
+  <!--<PropertyGroup Condition=" $(TargetFramework.StartsWith('MonoAndroid')) ">
+    <DefineConstants>$(DefineConstants);ANDROID</DefineConstants>
+  </PropertyGroup>-->
+
+  <PropertyGroup Condition=" '$(Configuration)'=='Release' And '$(OS)' == 'Windows_NT' ">
+    <!-- sourcelink: Declare that the Repository URL can be published to NuSpec -->
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <!-- sourcelink: Embed source files that are not tracked by the source control manager to the PDB -->
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <!-- sourcelink: Include PDB in the built .nupkg -->
+    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+  </PropertyGroup>
+
+  <ItemGroup Condition=" '$(Configuration)'=='Release' And '$(OS)' == 'Windows_NT' ">
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <EnableDefaultEmbeddedResourceItems>true</EnableDefaultEmbeddedResourceItems>
+    <EnableDefaultXamlItems>true</EnableDefaultXamlItems>
+    <EnableDefaultCompileItems>true</EnableDefaultCompileItems>
+    <EnableDefaultItems>true</EnableDefaultItems>
+
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <Company />
+
+    <DefaultItemExcludes Condition=" $(TargetFramework.StartsWith('MonoAndroid'))=='False' ">$(DefaultItemExcludes);**\*.android.cs;</DefaultItemExcludes>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!--<None Include="..\LICENSE" PackagePath="" Pack="true" />
+    <None Include="..\Assets\package_logo_128x128.png" PackagePath="\" Pack="true" />-->
+
+    <None Include="..\LICENSE" PackagePath="" Pack="true" />
+    <None Include="..\Assets\package_logo_128x128.png" PackagePath="\" Pack="true" />
+
+
+    <None Include="**\*.android.cs;**\*.android.*.cs" />
+    <!--<None Include="Resources\Resource.Designer.cs" />-->
+    <None Include="Resources\AboutResources.txt" />
+    <None Include="Resources\xml\*.xml;Resources\font\*.*;Resources\values\*.xml;Resources\layout\*.xml;Resources\drawable\*.xml" />
+    <Compile Remove="Resources\Resource.Designer.cs" />
+
+
+    <!--<ItemGroup Condition="'$(EnableDefaultItems)'=='False' And '$(EnableDefaultXamlItems)'=='False' And '$(EnableDefaultEmbeddedResourceItems)'=='True'">
+      <EmbeddedResource Include="**\*.xaml" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" SubType="Designer" Generator="MSBuild:UpdateDesignTimeXaml" />
+    </ItemGroup>
+
+    <ItemGroup Condition="'$(EnableDefaultItems)'=='True' And '$(EnableDefaultCssItems)'=='True' And '$(EnableDefaultEmbeddedResourceItems)'=='True'">
+      <EmbeddedResource Include="**\*.css" Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder)" />
+    </ItemGroup>-->
+
+
+
+    <!--<Compile Include="**\*.shared.cs;**\*.shared.*.cs;ResX\*.Designer.cs" />-->
+    <!--<Compile Include="**\*.shared.cs;**\*.shared.*.cs;ResX\*.Designer.cs" Exclude="**\*.xaml.cs" />-->
+
+    <!--<EmbeddedResource Include="**\*.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+
+    <Compile Include="**\*.xaml.cs">
+      <SubType>Code</SubType>
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+    <Compile Remove="**\*.xaml.g.cs" />-->
+    <!--<EmbeddedResource Include="**\*.json" />-->
+
+    <EmbeddedResource Include="ResX\*.resx" />
+
+    <PackageReference Include="System.Numerics.Vectors" Version="4.5.0" />
+    <PackageReference Include="Xamarin.Forms" Version="4.7.0.1179" />
+  </ItemGroup>
+
+  <!--<ItemGroup Condition=" $(TargetFramework.StartsWith('netstandard1.')) ">
+    <PackageReference Include="System.ValueTuple" Version="4.5.0" />
+  </ItemGroup>-->
+
+
+  <ItemGroup Condition=" $(TargetFramework.StartsWith('netstandard')) ">
+
+  </ItemGroup>
+
+  <ItemGroup Condition=" $(TargetFramework.StartsWith('MonoAndroid')) ">
+    <!--<None Include="**\*.android.cs;**\*.android.*.cs" />-->
+    <!--<Compile Include="**\*.android.cs;**\*.android.*.cs" />-->
+    <!--<Compile Include="**\*.android.*.cs" />-->
+    <!--<Folder Include="Resources\" />-->
+    <None Include="Resources\AboutResources.txt" />
+    <AndroidResource Include="Resources\xml\*.xml;Resources\font\*.*;Resources\values\*.xml" />
+
+    <AndroidResource Include="Resources\layout\*.xml;Resources\drawable\*.xml">
+      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
+      <SubType>Designer</SubType>
+    </AndroidResource>
+
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Mono.Android" />
+    <Reference Include="mscorlib" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Web.Services" />
+    <!--<Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />-->
+
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors" />
+    <PackageReference Include="Xamarin.Android.Support.Compat" Version="28.0.0.3" />
+    <PackageReference Include="Xamarin.Android.Support.CustomTabs" Version="28.0.0.3" />
+    <PackageReference Include="Xamarin.Android.Support.Design" Version="28.0.0.3" />
+    <PackageReference Include="Xamarin.Android.Support.v7.AppCompat" Version="28.0.0.3" />
+    <PackageReference Include="Xamarin.Android.Support.v4" Version="28.0.0.3" />
+    <PackageReference Include="Xamarin.Android.Support.v7.CardView" Version="28.0.0.3" />
+    <PackageReference Include="Xamarin.Android.Support.v7.MediaRouter" Version="28.0.0.3" />
+    <PackageReference Condition=" '$(OS)' == 'Windows_NT' And $(TargetFrameworkVersion.TrimStart('vV')) &lt; 9.0 And $(TargetFrameworkVersion.TrimStart('vV')) &lt; 10.0" Include="Xamarin.Android.Support.Core.Utils" Version="28.0.0.3" />
+    <PackageReference Condition=" '$(OS)' != 'Windows_NT' " Include="Xamarin.Android.Support.Core.Utils" Version="28.0.0.3" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.iOS')) ">
+    <Compile Include="**\*.ios.cs" />
+    <Compile Include="**\*.ios.*.cs" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="OpenTK-1.0" />
+
+    <!--https://github.com/xamarin/Xamarin.Forms/issues/1380-->
+    <!-- <PackageReference Include="System.Reflection.Emit" Version="4.3.0">
+      <ExcludeAssets>all</ExcludeAssets>
+    </PackageReference> -->
+  </ItemGroup>
+
+  <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.TVOS')) ">
+    <Compile Include="**\*.tvos.cs" />
+    <Compile Include="**\*.tvos.*.cs" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors" />
+    <Reference Include="OpenTK-1.0" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.WatchOS')) ">
+    <Compile Include="**\*.watchos.cs" />
+    <Compile Include="**\*.watchos.*.cs" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors" />
+  </ItemGroup>
+
+  <!--<ItemGroup>
+    <None Update="shared_view.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+  </ItemGroup>-->
+</Project>
